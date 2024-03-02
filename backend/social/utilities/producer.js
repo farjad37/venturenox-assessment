@@ -10,7 +10,7 @@ const initProducer = async () => {
 
 	const kafka = new Kafka({
 		clientId: 'social',
-		brokers: ['kafka:9092']
+		brokers: ['localhost:9092']
 	});
 
 	const admin = kafka.admin();
@@ -53,9 +53,9 @@ const initProducer = async () => {
 								city: faker.address.city(),
 								state: faker.address.state(),
 								country: faker.address.country(),
-								zip_code: faker.address.zipCode(),
+								zipCode: faker.address.zipCode(),
 								phone: faker.phone.phoneNumber(),
-								web_url: faker.internet.domainName()
+								webUrl: faker.internet.domainName()
 							}
 						}),
 					}
@@ -66,7 +66,6 @@ const initProducer = async () => {
 		});
 
 		tenantIds.map(async (id) => {
-
 			await producer.send({
 				topic: 'event_stream',
 				messages: [
@@ -77,17 +76,17 @@ const initProducer = async () => {
 							event_name: 'user_created',
 							properties: {
 								id: faker.datatype.number({ min: 100000, max: 999999 }),
-								first_name: faker.name.firstName(),
-								last_name: faker.name.lastName(),
+								firstName: faker.name.firstName(),
+								lastName: faker.name.lastName(),
 								department: faker.lorem.word(),
 								designation: faker.lorem.word(),
-								tenant_id: id,
-								image_url: faker.random.image(),
+								tenantId: id,
+								imageUrl: faker.random.image(),
 								city: faker.address.city(),
 								country: faker.address.country(),
 								bio: faker.lorem.sentence(),
-								social_links: {facebook: 'https://facebook.com/'},
-								employee_id: faker.datatype.number(),
+								socialLinks: {facebook: 'https://facebook.com/'},
+								employeeId: faker.datatype.number(),
 							}
 						}),
 					}
