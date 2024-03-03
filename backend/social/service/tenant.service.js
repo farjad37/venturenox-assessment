@@ -14,7 +14,7 @@ class TenantService {
             phone: tenantData.phone,
             webUrl: tenantData.webUrl,
           });
-          return tenant.id;
+          return tenant;
         } catch (error) {
           throw new Error(error.message);
         }
